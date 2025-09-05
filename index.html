@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purushotham M - Portfolio</title>
+  <style>
+    /* Background + Fonts */
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0a1a2f, #0d223d, #0a1a2f);
+      background-size: 400% 400%;
+      animation: gradientBG 20s ease infinite;
+      color: #ffcc33;
+      overflow-x: hidden;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1, h2 {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    section {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
+    p {
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    /* Skills List */
+    ul {
+      padding: 0;
+      max-width: 500px;
+      margin: 20px auto;
+    }
+
+    ul li {
+      list-style: none;
+      margin: 8px 0;
+      font-size: 1.1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out, box-shadow 0.3s ease, transform 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 6px;
+      background: rgba(255, 179, 71, 0.05);
+      cursor: pointer;
+    }
+
+    ul li.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    ul li:hover {
+      color: #fff6cc;
+      background: rgba(255, 179, 71, 0.15);
+      box-shadow: 0 0 12px rgba(255, 204, 51, 0.8);
+      transform: scale(1.05);
+    }
+
+    /* Buttons */
+    button, .btn {
+      background: transparent;
+      color: #ffcc33;
+      border: 2px solid #ffcc33;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    button:hover, .btn:hover {
+      background: rgba(255, 179, 71, 0.15);
+      color: #fff6cc;
+      box-shadow: 0 0 15px rgba(255, 204, 51, 0.8);
+      transform: scale(1.08);
+    }
+
+    /* Shimmer effect */
+    button::after, .btn::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 204, 51, 0.6),
+        transparent
+      );
+      transform: skewX(-20deg);
+    }
+
+    button:hover::after, .btn:hover::after {
+      animation: shimmer 1s forwards;
+    }
+
+    @keyframes shimmer {
+      100% {
+        left: 125%;
+      }
+    }
+
+    /* Scroll Animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Particle Background Canvas */
+    #bgCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Animation Canvas -->
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- Hero -->
+  <section id="hero" class="fade-in">
+    <h1>Hi, I'm <span style="color:#ffb347;">Purushotham M</span></h1>
+    <p>Computer Science Student | Developer | Game Enthusiast</p>
+    <div style="text-align:center; margin-top:20px;">
+      <a href="mailto:purushothambm2006@gmail.com" class="btn">Email Me</a>
+      <a href="https://github.com/purushotham030706" class="btn" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/purushotham-m-61b35937a" class="btn" target="_blank">LinkedIn</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="fade-in">
+    <h2>About Me</h2>
+    <p>
+      I'm Purushotham M, a Computer Science student passionate about front-end development, 
+      programming, and creating impactful projects.
+    </p>
+    <p>
+      Outside of this, I'm interested in following the developments of science.  
+      I also play a lot of video games.
+    </p>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="fade-in">
+    <h2>Skills</h2>
+    <ul>
+      <li>JavaScript</li>
+      <li>Cascading Style Sheets (CSS)</li>
+      <li>HTML</li>
+      <li>Unreal Engine</li>
+      <li>Blender</li>
+      <li>Game Development</li>
+      <li>Adobe Creative Suite</li>
+      <li>Java</li>
+      <li>C (Programming Language)</li>
+      <li>C++</li>
+      <li>Python (Programming Language)</li>
+      <li>Microsoft Office</li>
+    </ul>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="fade-in">
+    <h2>Projects</h2>
+    <ul>
+      <li>Café Tracker (with planned location feature)</li>
+    </ul>
+  </section>
+
+  <!-- Scripts -->
+  <script>
+    /* Fade-in on Scroll */
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
+    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      });
+    }, appearOptions);
+    faders.forEach(fader => { appearOnScroll.observe(fader); });
+
+    /* Skills stagger effect */
+    const skills = document.querySelectorAll('#skills li');
+    const skillObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          skills.forEach((skill, i) => {
+            setTimeout(() => skill.classList.add('visible'), i * 120);
+          });
+          skillObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    skillObserver.observe(document.querySelector('#skills'));
+
+    /* Particle Tree-like Background */
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    let particlesArray = [];
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      }
+      draw() {
+        ctx.fillStyle = '#ffcc33';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function init() {
+      particlesArray = [];
+      for (let i = 0; i < 100; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+
+    function connect() {
+      for (let a = 0; a < particlesArray.length; a++) {
+        for (let b = a; b < particlesArray.length; b++) {
+          const dx = particlesArray[a].x - particlesArray[b].x;
+          const dy = particlesArray[a].y - particlesArray[b].y;
+          const distance = dx * dx + dy * dy;
+          if (distance < (canvas.width / 10) * (canvas.height / 10)) {
+            ctx.strokeStyle = 'rgba(255, 204, 51, 0.2)';
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particlesArray.forEach(p => { p.update(); p.draw(); });
+      connect();
+      requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init();
+    });
+  </script>
+</body>
+</html>
