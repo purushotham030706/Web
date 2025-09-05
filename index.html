@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Purushotham M | Portfolio</title>
+  <title>Purushotham M</title>
   <style>
     body {
       margin: 0;
@@ -130,8 +130,8 @@
     <p>Computer Science Student | Developer | Game Enthusiast</p>
     <div class="buttons">
       <a href="mailto:purushothambm2006@gmail.com" class="btn">Email Me</a>
-      <a href="https://github.com/puru" target="_blank" class="btn">GitHub</a>
-      <a href="https://linkedin.com/in/purushotham-m" target="_blank" class="btn">LinkedIn</a>
+      <a href="https://github.com/purushotham030706" target="_blank" class="btn">GitHub</a>
+      <a href="https://www.linkedin.com/in/purushotham-m-61b35937a" target="_blank" class="btn">LinkedIn</a>
     </div>
   </header>
 
@@ -167,11 +167,11 @@
 
   <section id="projects">
     <h2>Projects</h2>
-    <div class="project-card" onclick="openModal()">
+
+    <!-- Café Tracker -->
+    <div class="project-card" onclick="openModal('cafe')">
       <h3>Café Tracker</h3>
-      <p>
-        A web app to track and manage café visits with smart features:
-      </p>
+      <p>A web app to track and manage café visits with smart features:</p>
       <ul>
         <li>📍 Integrated location tracking</li>
         <li>💰 Expense management</li>
@@ -180,15 +180,30 @@
       </ul>
       <div class="project-links">
         <a href="https://github.com/puru/cafe-tracker" target="_blank">GitHub</a>
-        <a href="#" onclick="openModal()">Details</a>
+        <a href="#" onclick="openModal('cafe')">Details</a>
+      </div>
+    </div>
+
+    <!-- Run n Gun -->
+    <div class="project-card" onclick="openModal('runnGun')">
+      <h3>Run n Gun</h3>
+      <p>A 2D endless run-and-gun game built with Unreal Engine:</p>
+      <ul>
+        <li>🎮 Fast-paced shooting mechanics</li>
+        <li>🔄 Endless procedural level design</li>
+        <li>🕹️ Developed entirely in Unreal Engine</li>
+      </ul>
+      <div class="project-links">
+        <a href="#" target="_blank">GitHub</a>
+        <a href="#" onclick="openModal('runnGun')">Details</a>
       </div>
     </div>
   </section>
 
-  <!-- Modal -->
-  <div id="projectModal" class="modal">
+  <!-- Café Tracker Modal -->
+  <div id="modal-cafe" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
+      <span class="close" onclick="closeModal('cafe')">&times;</span>
       <h2>Café Tracker</h2>
       <p>
         Café Tracker is a full-featured web app designed to track café visits in 
@@ -207,25 +222,45 @@
     </div>
   </div>
 
+  <!-- Run n Gun Modal -->
+  <div id="modal-runnGun" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('runnGun')">&times;</span>
+      <h2>Run n Gun</h2>
+      <p>
+        Run n Gun is a 2D endless run-and-gun game with addictive fast-paced gameplay 
+        developed in Unreal Engine.
+      </p>
+      <h3>Features:</h3>
+      <ul>
+        <li>🎮 Shooting mechanics with responsive controls</li>
+        <li>🔄 Endless procedural generation of levels</li>
+        <li>⚡ Increasing difficulty curve for replayability</li>
+      </ul>
+      <h3>Tech Stack:</h3>
+      <p>Unreal Engine, Blueprint Scripting, 2D Sprites</p>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
     // Modal handling
-    function openModal() {
-      document.getElementById("projectModal").style.display = "block";
+    function openModal(id) {
+      document.getElementById("modal-" + id).style.display = "block";
     }
 
-    function closeModal() {
-      document.getElementById("projectModal").style.display = "none";
+    function closeModal(id) {
+      document.getElementById("modal-" + id).style.display = "none";
     }
 
     window.onclick = function(event) {
-      let modal = document.getElementById("projectModal");
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
+      let cafeModal = document.getElementById("modal-cafe");
+      let runnGunModal = document.getElementById("modal-runnGun");
+      if (event.target == cafeModal) cafeModal.style.display = "none";
+      if (event.target == runnGunModal) runnGunModal.style.display = "none";
     }
 
-    // Particles.js
+    // Particles.js config
     particlesJS("particles-js", {
       "particles": {
         "number": { "value": 80 },
