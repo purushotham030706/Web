@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purushotham M | Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #0a1a2f;
+      color: #ffcc33;
+      text-align: center;
+    }
+
+    #particles-js {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+    }
+
+    header h1 span {
+      color: #ffb300;
+    }
+
+    h2 {
+      margin-top: 40px;
+      font-size: 2rem;
+      color: #ffcc33;
+    }
+
+    p, li {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .buttons {
+      margin-top: 15px;
+    }
+
+    .btn {
+      border: 2px solid #ffcc33;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 8px;
+      color: #ffcc33;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #ffcc33;
+      color: #0a1a2f;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background: rgba(255, 204, 51, 0.05);
+      margin: 8px auto;
+      padding: 10px;
+      width: 80%;
+      border-radius: 8px;
+    }
+
+    .project-card {
+      background: rgba(255, 204, 51, 0.05);
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 12px;
+      width: 85%;
+      transition: transform 0.3s, background 0.3s;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 204, 51, 0.15);
+    }
+
+    .project-links a {
+      margin: 10px;
+      color: #ffcc33;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-bottom 0.3s;
+    }
+
+    .project-links a:hover {
+      border-bottom: 1px solid #ffcc33;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+    }
+
+    .modal-content {
+      background: #112240;
+      color: #ffcc33;
+      margin: 10% auto;
+      padding: 20px;
+      width: 80%;
+      border-radius: 12px;
+      text-align: left;
+    }
+
+    .close {
+      float: right;
+      font-size: 28px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+
+  <header>
+    <h1>Hi, I'm <span>Purushotham M</span></h1>
+    <p>Computer Science Student | Developer | Game Enthusiast</p>
+    <div class="buttons">
+      <a href="mailto:purushothambm2006@gmail.com" class="btn">Email Me</a>
+      <a href="https://github.com/puru" target="_blank" class="btn">GitHub</a>
+      <a href="https://linkedin.com/in/purushotham-m" target="_blank" class="btn">LinkedIn</a>
+    </div>
+  </header>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I'm Purushotham M, a Computer Science student passionate about front-end 
+      development, programming, and creating impactful projects.
+    </p>
+    <p>
+      Outside of this, I'm interested in following the developments of science. 
+      I also play a lot of video games.
+    </p>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <ul>
+      <li>JavaScript</li>
+      <li>CSS</li>
+      <li>HTML</li>
+      <li>Unreal Engine</li>
+      <li>Blender</li>
+      <li>Game Development</li>
+      <li>Adobe Creative Suite</li>
+      <li>Java</li>
+      <li>C</li>
+      <li>C++</li>
+      <li>Python</li>
+      <li>Microsoft Office</li>
+    </ul>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="project-card" onclick="openModal()">
+      <h3>Café Tracker</h3>
+      <p>
+        A web app to track and manage café visits with smart features:
+      </p>
+      <ul>
+        <li>📍 Integrated location tracking</li>
+        <li>💰 Expense management</li>
+        <li>📅 Date-wise visit history</li>
+        <li>📸 Option to upload photos for each visit</li>
+      </ul>
+      <div class="project-links">
+        <a href="https://github.com/puru/cafe-tracker" target="_blank">GitHub</a>
+        <a href="#" onclick="openModal()">Details</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div id="projectModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Café Tracker</h2>
+      <p>
+        Café Tracker is a full-featured web app designed to track café visits in 
+        a more personalized way. It combines expense management with geolocation 
+        and adds features to make each visit memorable.
+      </p>
+      <h3>Features:</h3>
+      <ul>
+        <li>📍 Location tracking with Google Maps API</li>
+        <li>💰 Expense logging with automatic totals</li>
+        <li>📅 Visit history with timestamps</li>
+        <li>📸 Upload & view photos of each café/meal</li>
+      </ul>
+      <h3>Tech Stack:</h3>
+      <p>HTML, CSS, JavaScript, Firebase</p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    // Modal handling
+    function openModal() {
+      document.getElementById("projectModal").style.display = "block";
+    }
+
+    function closeModal() {
+      document.getElementById("projectModal").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      let modal = document.getElementById("projectModal");
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    // Particles.js
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 80 },
+        "color": { "value": "#ffcc33" },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.7 },
+        "size": { "value": 3 },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#ffcc33",
+          "opacity": 0.4,
+          "width": 1
+        },
+        "move": { "enable": true, "speed": 3 }
+      },
+      "interactivity": {
+        "events": { "onhover": { "enable": true, "mode": "repulse" } }
+      }
+    });
+  </script>
+</body>
+</html>
