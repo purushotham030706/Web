@@ -1,375 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Purushotham Mahesh</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Purushotham M</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow-x: hidden;
-      font-family: Arial, sans-serif;
-      background: #0a0a2a;
+    body {
+      background: linear-gradient(135deg, #0a1a33, #05101f);
       color: #ffcc66;
+      font-family: 'Poppins', sans-serif;
     }
 
-    canvas#bgCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1;
+    /* Glow hover */
+    .glow:hover {
+      color: #ffdb70;
+      text-shadow: 0px 0px 8px #ffdb70, 0px 0px 16px #ffaa33;
+      transform: scale(1.05);
+      transition: 0.3s ease-in-out;
     }
 
-    header {
-      text-align: center;
-      padding: 80px 20px 20px;
-      animation: fadeIn 1.5s ease-in-out;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2.8rem;
-    }
-
-    section {
-      padding: 60px 20px;
-      max-width: 900px;
-      margin: auto;
+    /* Fade-in & slide-up */
+    .fade-in {
       opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s ease-out;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
     }
-
-    section.visible {
+    .fade-in.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
-    h2 {
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
-
-    /* Skills in two columns */
-    #skills ul {
-      list-style: none;
-      padding: 0;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      max-width: 450px;
-      margin: auto;
-    }
-
-    #skills li {
-      text-align: center;
-      padding: 10px;
-      background: rgba(17, 17, 68, 0.85);
-      border-radius: 6px;
-      animation: fadeInUp 1s ease forwards;
-    }
-
-    /* Project cards */
-    .projects {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
-
+    /* Project card style */
     .card {
-      background: rgba(17, 17, 68, 0.85);
-      border-radius: 10px;
-      padding: 20px;
-      width: 260px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-      transition: transform 0.3s;
-      cursor: pointer;
+      background: rgba(255, 204, 102, 0.05);
+      border: 1px solid rgba(255, 204, 102, 0.2);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
     }
-
     .card:hover {
-      transform: translateY(-5px);
-    }
-
-    /* Modal (popup) */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(6px);
-      justify-content: center;
-      align-items: center;
-      animation: fadeIn 0.4s;
-      z-index: 1000;
-    }
-
-    .modal-content {
-      background: #0d0d3d;
-      color: #ffcc66;
-      padding: 30px;
-      border-radius: 10px;
-      max-width: 500px;
-      text-align: center;
-      animation: zoomIn 0.4s;
-    }
-
-    .modal-content h3 {
-      margin-top: 0;
-    }
-
-    .modal-content button {
-      background: #ffcc66;
-      color: #0a0a2a;
-      border: none;
-      padding: 10px 20px;
-      margin-top: 20px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .modal-content button:hover {
-      background: #ffdb80;
-    }
-
-    /* Contact */
-    #contact a {
-      color: #ffcc66;
-      text-decoration: none;
-    }
-
-    #contact a:hover {
-      text-decoration: underline;
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      font-size: 12px;
-      margin-top: 40px;
-      padding: 20px;
-      color: inherit;
-      opacity: 0.7;
-    }
-
-    /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes fadeInUp {
-      from { transform: translateY(30px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    @keyframes zoomIn {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+      background: rgba(255, 204, 102, 0.1);
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 204, 102, 0.3);
     }
   </style>
 </head>
-<body>
-  <!-- Background Canvas -->
-  <canvas id="bgCanvas"></canvas>
+<body class="overflow-x-hidden">
 
-  <header>
-    <h1>Purushotham Mahesh</h1>
-    <p>Computer Science Student | Developer</p>
+  <!-- Particle bg -->
+  <div id="particles-js" class="fixed top-0 left-0 w-full h-full -z-10"></div>
+
+  <!-- Header -->
+  <header class="text-center py-20">
+    <h1 class="text-5xl font-extrabold text-orange-400 fade-in">Purushotham M</h1>
+    <p class="mt-4 text-lg glow fade-in">purushothambm2006@gmail.com</p>
+    <p class="mt-2 glow fade-in">
+      <a href="https://github.com/purushotham030706" target="_blank" class="underline">GitHub</a> | 
+      <a href="https://www.linkedin.com/in/purushotham-m-61b35937a" target="_blank" class="underline">LinkedIn</a>
+    </p>
   </header>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>
-      I’m a Computer Science student passionate about coding, technology, and design.  
-      Outside of work, I follow developments in science and play a lot of video games.  
-      I love creating projects that combine functionality with creativity.
-    </p>
-  </section>
-
-  <section id="skills">
-    <h2>Skills</h2>
-    <ul>
-      <li>C Programming</li>
-      <li>Python</li>
-      <li>Java</li>
-      <li>Web Development</li>
-      <li>UI/UX Design</li>
-      <li>Unreal Engine (Game Dev)</li>
-    </ul>
-  </section>
-
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="projects">
-      <!-- Café Tracker -->
-      <div class="card" onclick="openModal('cafe')">
-        <h3>Café Tracker</h3>
-        <p>Track café visits with location, dates, and photo uploads.</p>
-      </div>
-
-      <!-- Run n Gun -->
-      <div class="card" onclick="openModal('run')">
-        <h3>Run n Gun</h3>
-        <p>2D endless run-and-gun game built in Unreal Engine.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>
-      Email me at  
-      <a href="mailto:purushothambm2006@gmail.com">purushothambm2006@gmail.com</a>
-    </p>
-  </section>
-
-  <footer>
-    Built & Designed by Purushotham Mahesh
-  </footer>
-
-  <!-- Modals -->
-  <div id="cafeModal" class="modal">
-    <div class="modal-content">
-      <h3>Café Tracker</h3>
-      <p>
-        A full-stack web app that allows users to log café visits with:
+  <!-- About -->
+  <section id="about" class="py-20 px-6 fade-in">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-4xl font-bold text-orange-400 mb-6">About Me</h2>
+      <p class="text-yellow-200 text-lg">
+        Hi, I’m Purushotham. I’m passionate about coding, design, and building useful projects.  
+        Outside of work, I’m interested in following the developments of science. I also play a lot of video games.  
       </p>
-      <ul style="list-style:none; padding:0;">
-        <li>📍 Location integration</li>
-        <li>📅 Visit date tracking</li>
-        <li>🖼️ Photo uploads</li>
-      </ul>
-      <p><b>Tech Stack:</b> HTML, CSS, JS, Firebase</p>
-      <button onclick="closeModal('cafe')">Close</button>
     </div>
-  </div>
+  </section>
 
-  <div id="runModal" class="modal">
-    <div class="modal-content">
-      <h3>Run n Gun</h3>
-      <p>
-        A fast-paced 2D endless runner combined with a shooting mechanic.  
-        Players dodge obstacles and shoot enemies in an arcade-style loop.
-      </p>
-      <p><b>Tech Stack:</b> Unreal Engine, Blueprints, C++</p>
-      <button onclick="closeModal('run')">Close</button>
+  <!-- Skills -->
+  <section id="skills" class="py-20 fade-in">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold text-orange-400 mb-12">Skills</h2>
+      <div id="skills-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-center"></div>
     </div>
-  </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="py-20 px-6 fade-in">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-4xl font-bold text-orange-400 mb-12 text-center">Projects</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Café Tracker Card -->
+        <div class="card">
+          <h3 class="text-2xl font-semibold text-orange-300">Café Tracker</h3>
+          <p class="mt-2 text-yellow-200">
+            A web app to track cafes visited with <strong>location integration, visit dates, and picture uploads</strong>.
+          </p>
+        </div>
+
+        <!-- Run n Gun Card -->
+        <div class="card">
+          <h3 class="text-2xl font-semibold text-orange-300">Run n Gun</h3>
+          <p class="mt-2 text-yellow-200">
+            A 2D endless run-and-gun game built using Unreal Engine.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
 
   <!-- Scripts -->
   <script>
-    // Fade-in on scroll
-    const sections = document.querySelectorAll("section");
-    const observer = new IntersectionObserver((entries) => {
+    /* Particles.js */
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#ffaa33" },
+        shape: { type: "circle" },
+        opacity: { value: 0.6, random: true },
+        size: { value: 3, random: true },
+        line_linked: { enable: true, distance: 120, color: "#ffcc66", opacity: 0.4, width: 1 },
+        move: { enable: true, speed: 2, direction: "none", out_mode: "out" }
+      }
+    });
+
+    /* Fade-in scroll */
+    const faders = document.querySelectorAll(".fade-in");
+    const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible");
         }
       });
     }, { threshold: 0.2 });
-    sections.forEach(section => observer.observe(section));
+    faders.forEach(el => observer.observe(el));
 
-    // Modal controls
-    function openModal(project) {
-      document.getElementById(project + "Modal").style.display = "flex";
-    }
+    /* Skills grid */
+    const skills = [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React",
+      "Python",
+      "C Programming",
+      "Java",
+      "UI/UX Basics"
+    ];
+    const skillsContainer = document.getElementById("skills-container");
 
-    function closeModal(project) {
-      document.getElementById(project + "Modal").style.display = "none";
-    }
-
-    // Close modal on outside click
-    window.onclick = function(event) {
-      document.querySelectorAll(".modal").forEach(modal => {
-        if (event.target === modal) {
-          modal.style.display = "none";
-        }
-      });
-    };
-
-    // Animated background
-    const canvas = document.getElementById("bgCanvas");
-    const ctx = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    let particles = [];
-    const numParticles = 70;
-
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.radius = 2;
-        this.dx = (Math.random() - 0.5) * 1;
-        this.dy = (Math.random() - 0.5) * 1;
-      }
-
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-        ctx.fillStyle = "#ffcc66";
-        ctx.fill();
-      }
-
-      update() {
-        this.x += this.dx;
-        this.y += this.dy;
-
-        if (this.x < 0 || this.x > canvas.width) this.dx = -this.dx;
-        if (this.y < 0 || this.y > canvas.height) this.dy = -this.dy;
-
-        this.draw();
-      }
-    }
-
-    function init() {
-      particles = [];
-      for (let i = 0; i < numParticles; i++) {
-        particles.push(new Particle());
-      }
-    }
-
-    function connect() {
-      for (let a = 0; a < particles.length; a++) {
-        for (let b = a; b < particles.length; b++) {
-          let dx = particles[a].x - particles[b].x;
-          let dy = particles[a].y - particles[b].y;
-          let dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < 120) {
-            ctx.beginPath();
-            ctx.strokeStyle = "rgba(255, 204, 102, 0.3)";
-            ctx.lineWidth = 1;
-            ctx.moveTo(particles[a].x, particles[a].y);
-            ctx.lineTo(particles[b].x, particles[b].y);
-            ctx.stroke();
-          }
-        }
-      }
-    }
-
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => p.update());
-      connect();
-      requestAnimationFrame(animate);
-    }
-
-    init();
-    animate();
-
-    window.addEventListener("resize", () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      init();
+    skills.forEach(skill => {
+      const div = document.createElement("div");
+      div.textContent = skill;
+      div.classList.add("text-lg", "glow", "text-yellow-200");
+      skillsContainer.appendChild(div);
     });
   </script>
 </body>
