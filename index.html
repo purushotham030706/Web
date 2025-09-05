@@ -13,7 +13,7 @@
       font-family: 'Poppins', sans-serif;
     }
 
-    /* Glow hover effect */
+    /* Glow hover */
     .glow:hover {
       color: #ffdb70;
       text-shadow: 0px 0px 8px #ffdb70, 0px 0px 16px #ffaa33;
@@ -21,7 +21,7 @@
       transition: 0.3s ease-in-out;
     }
 
-    /* Fade-in & slide-up animations */
+    /* Fade-in & slide-up */
     .fade-in {
       opacity: 0;
       transform: translateY(20px);
@@ -31,11 +31,25 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* Project card style */
+    .card {
+      background: rgba(255, 204, 102, 0.05);
+      border: 1px solid rgba(255, 204, 102, 0.2);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    .card:hover {
+      background: rgba(255, 204, 102, 0.1);
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 204, 102, 0.3);
+    }
   </style>
 </head>
 <body class="overflow-x-hidden">
 
-  <!-- Particle tree-like animation -->
+  <!-- Particle bg -->
   <div id="particles-js" class="fixed top-0 left-0 w-full h-full -z-10"></div>
 
   <!-- Header -->
@@ -61,9 +75,9 @@
 
   <!-- Skills -->
   <section id="skills" class="py-20 fade-in">
-    <div class="max-w-5xl mx-auto px-6">
-      <h2 class="text-4xl font-bold text-orange-400 mb-12 text-center">Skills</h2>
-      <div id="skills-container" class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12 text-yellow-200 text-lg"></div>
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold text-orange-400 mb-12">Skills</h2>
+      <div id="skills-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-center"></div>
     </div>
   </section>
 
@@ -71,28 +85,31 @@
   <section id="projects" class="py-20 px-6 fade-in">
     <div class="max-w-5xl mx-auto">
       <h2 class="text-4xl font-bold text-orange-400 mb-12 text-center">Projects</h2>
-      
-      <!-- Café Tracker -->
-      <div class="mb-12 glow">
-        <h3 class="text-2xl font-semibold text-orange-300">Café Tracker</h3>
-        <p class="mt-2 text-yellow-200">
-          A web app to track cafes visited with **location integration, visit dates, and picture uploads**.
-        </p>
-      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Café Tracker Card -->
+        <div class="card">
+          <h3 class="text-2xl font-semibold text-orange-300">Café Tracker</h3>
+          <p class="mt-2 text-yellow-200">
+            A web app to track cafes visited with <strong>location integration, visit dates, and picture uploads</strong>.
+          </p>
+        </div>
 
-      <!-- Run n Gun -->
-      <div class="glow">
-        <h3 class="text-2xl font-semibold text-orange-300">Run n Gun</h3>
-        <p class="mt-2 text-yellow-200">
-          A 2D endless run-and-gun game built using Unreal Engine.
-        </p>
+        <!-- Run n Gun Card -->
+        <div class="card">
+          <h3 class="text-2xl font-semibold text-orange-300">Run n Gun</h3>
+          <p class="mt-2 text-yellow-200">
+            A 2D endless run-and-gun game built using Unreal Engine.
+          </p>
+        </div>
+
       </div>
     </div>
   </section>
 
   <!-- Scripts -->
   <script>
-    /* Particles.js config */
+    /* Particles.js */
     particlesJS("particles-js", {
       particles: {
         number: { value: 80, density: { enable: true, value_area: 800 } },
@@ -105,7 +122,7 @@
       }
     });
 
-    /* Fade-in on scroll */
+    /* Fade-in scroll */
     const faders = document.querySelectorAll(".fade-in");
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -114,10 +131,9 @@
         }
       });
     }, { threshold: 0.2 });
-
     faders.forEach(el => observer.observe(el));
 
-    /* Skills list generator (auto 2-column) */
+    /* Skills grid */
     const skills = [
       "HTML",
       "CSS",
@@ -129,24 +145,13 @@
       "UI/UX Basics"
     ];
     const skillsContainer = document.getElementById("skills-container");
-    const half = Math.ceil(skills.length / 2);
-    const col1 = skills.slice(0, half);
-    const col2 = skills.slice(half);
 
-    const createList = (arr) => {
-      const ul = document.createElement("ul");
-      ul.classList.add("space-y-2");
-      arr.forEach(skill => {
-        const li = document.createElement("li");
-        li.textContent = skill;
-        li.classList.add("glow");
-        ul.appendChild(li);
-      });
-      return ul;
-    };
-
-    skillsContainer.appendChild(createList(col1));
-    skillsContainer.appendChild(createList(col2));
+    skills.forEach(skill => {
+      const div = document.createElement("div");
+      div.textContent = skill;
+      div.classList.add("text-lg", "glow", "text-yellow-200");
+      skillsContainer.appendChild(div);
+    });
   </script>
 </body>
 </html>
