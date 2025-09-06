@@ -1,218 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Purushotham M</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <style>
-    /* Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
-      font-family: Arial, sans-serif;
-      color: #fff;
-      background: #0d1117;
-      overflow-x: hidden;
-      min-height: 100vh;
+      background: linear-gradient(135deg, #0a1a33, #05101f);
+      color: #ffcc66;
+      font-family: 'Poppins', sans-serif;
     }
 
-    canvas#bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
-
-    header {
-      text-align: center;
-      padding: 3rem 1rem;
-    }
-
-    header h1 {
-      font-size: 2.5rem;
-    }
-
-    main {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
-    section h2 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      text-align: center;
-    }
-
-    /* Projects grid */
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .project-card {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 1.5rem;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
-
-    .project-card:hover {
+    /* Glow hover */
+    .glow:hover {
+      color: #ffdb70;
+      text-shadow: 0px 0px 8px #ffdb70, 0px 0px 16px #ffaa33;
       transform: scale(1.05);
-      background: rgba(255, 255, 255, 0.1);
+      transition: 0.3s ease-in-out;
     }
 
-    /* Popup Modal */
+    /* Fade-in & slide-up */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Project card style */
+    .card {
+      background: rgba(255, 204, 102, 0.05);
+      border: 1px solid rgba(255, 204, 102, 0.2);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .card:hover {
+      background: rgba(255, 204, 102, 0.1);
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 204, 102, 0.3);
+    }
+
+    /* Modal styles */
     .modal {
       display: none;
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.7);
+      z-index: 50;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
       justify-content: center;
       align-items: center;
-      z-index: 10;
     }
-
     .modal-content {
-      background: #161b22;
+      background: #0a1a33;
+      border: 1px solid rgba(255, 204, 102, 0.3);
+      border-radius: 1rem;
       padding: 2rem;
-      border-radius: 12px;
-      max-width: 500px;
+      max-width: 600px;
       text-align: center;
-      position: relative;
+      color: #ffcc66;
+      animation: fadeInUp 0.4s ease;
     }
-
     .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 15px;
+      float: right;
       font-size: 1.5rem;
       cursor: pointer;
+      color: #ffaa33;
     }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-      opacity: 0.7;
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
-<body>
-  <!-- Background -->
-  <canvas id="bg"></canvas>
+<body class="overflow-x-hidden">
+
+  <!-- Particle bg -->
+  <div id="particles-js" class="fixed top-0 left-0 w-full h-full -z-10"></div>
 
   <!-- Header -->
-  <header>
-    <h1>My Portfolio</h1>
-    <p>Welcome to my personal website 🚀</p>
+  <header class="text-center py-20">
+    <h1 class="text-5xl font-extrabold text-orange-400 fade-in">Purushotham M</h1>
+    <p class="mt-4 text-lg glow fade-in">purushothambm2006@gmail.com</p>
+    <p class="mt-2 glow fade-in">
+      <a href="https://github.com/purushotham030706" target="_blank" class="underline">GitHub</a> | 
+      <a href="https://www.linkedin.com/in/purushotham-m-61b35937a" target="_blank" class="underline">LinkedIn</a>
+    </p>
   </header>
 
-  <!-- Main Content -->
-  <main>
-    <section id="projects">
-      <h2>Projects</h2>
-      <div class="projects">
-        <div class="project-card" data-title="Café Tracker" data-desc="A web app to track and rate cafés with location support." data-tech="HTML, CSS, JavaScript">
-          Café Tracker
+  <!-- About -->
+  <section id="about" class="py-20 px-6 fade-in">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-4xl font-bold text-orange-400 mb-6">/  about me</h2>
+      <p class="text-yellow-200 text-lg">
+        Hi, I’m Purushotham. 
+        I'm currently a student at JSSSTU, studying Computer Science Engineering. 
+        I’m passionate about coding, design, and building useful projects.  
+        Outside of work, I’m interested in following developments in game industry. 
+      </p>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="py-20 fade-in">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold text-orange-400 mb-12">/  skills</h2>
+      <div id="skills-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-center"></div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="py-20 px-6 fade-in">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-4xl font-bold text-orange-400 mb-12 text-center">/  projects</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Café Tracker Card -->
+        <div class="card" onclick="openModal('cafeModal')">
+          <h3 class="text-2xl font-semibold text-orange-300">Café Tracker</h3>
+          <p class="mt-2 text-yellow-200">
+            A web app to track cafes visited with location integration.
+          </p>
         </div>
-        <div class="project-card" data-title="Laser Security System" data-desc="Physics project using laser beams for security." data-tech="Laser, Electronics">
-          Laser Security System
+
+        <!-- Run n Gun Card -->
+        <div class="card" onclick="openModal('runModal')">
+          <h3 class="text-2xl font-semibold text-orange-300">Run n Gun</h3>
+          <p class="mt-2 text-yellow-200">
+            A 2D endless run-and-gun game built using Unreal Engine.
+          </p>
         </div>
-        <div class="project-card" data-title="Tesla Coil" data-desc="Engineering project showcasing wireless power transmission." data-tech="Electronics, Physics">
-          Tesla Coil
-        </div>
+
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 Your Name</p>
-  </footer>
-
-  <!-- Modal Popup -->
-  <div class="modal" id="projectModal">
+  <!-- Modals -->
+  <div id="cafeModal" class="modal">
     <div class="modal-content">
-      <span class="close-btn">&times;</span>
-      <h2 id="modalTitle"></h2>
-      <p id="modalDesc"></p>
-      <p><strong>Tech Stack:</strong> <span id="modalTech"></span></p>
+      <span class="close-btn" onclick="closeModal('cafeModal')">&times;</span>
+      <h2 class="text-3xl font-bold mb-4 text-orange-400">Café Tracker</h2>
+      <p class="mb-4 text-yellow-200">A web app to track cafes visited with <strong>location integration, visit dates, and picture uploads</strong>.</p>
+      <p class="text-yellow-300"><strong>Tech Stack:</strong> HTML, CSS, JavaScript</p>
+    </div>
+  </div>
+
+  <div id="runModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('runModal')">&times;</span>
+      <h2 class="text-3xl font-bold mb-4 text-orange-400">Run n Gun</h2>
+      <p class="mb-4 text-yellow-200">A 2D endless run-and-gun action game developed using Unreal Engine, featuring fast-paced mechanics and arcade-inspired gameplay.</p>
+      <p class="text-yellow-300"><strong>Tech Stack:</strong> Unreal Engine, Blueprint</p>
     </div>
   </div>
 
   <!-- Scripts -->
   <script>
-    // Background dots animation
-    const canvas = document.getElementById("bg");
-    const ctx = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    /* Particles.js */
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#ffaa33" },
+        shape: { type: "circle" },
+        opacity: { value: 0.6, random: true },
+        size: { value: 3, random: true },
+        line_linked: { enable: true, distance: 120, color: "#ffcc66", opacity: 0.4, width: 1 },
+        move: { enable: true, speed: 2, direction: "none", out_mode: "out" }
+      }
+    });
 
-    const dots = [];
-    for (let i = 0; i < 100; i++) {
-      dots.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: Math.random() * 2 + 1,
-        dx: (Math.random() - 0.5) * 0.5,
-        dy: (Math.random() - 0.5) * 0.5
+    /* Fade-in scroll */
+    const faders = document.querySelectorAll(".fade-in");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.2 });
+    faders.forEach(el => observer.observe(el));
+
+    /* Skills grid */
+    const skills = [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React",
+      "Python",
+      "C Programming",
+      "Java",
+      "UI/UX Basics"
+    ];
+    const skillsContainer = document.getElementById("skills-container");
+    skills.forEach(skill => {
+      const div = document.createElement("div");
+      div.textContent = skill;
+      div.classList.add("text-lg", "glow", "text-yellow-200");
+      skillsContainer.appendChild(div);
+    });
+
+    /* Modal functions */
+    function openModal(id) {
+      document.getElementById(id).style.display = "flex";
+    }
+    function closeModal(id) {
+      document.getElementById(id).style.display = "none";
+    }
+    window.onclick = function(event) {
+      document.querySelectorAll(".modal").forEach(modal => {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
       });
     }
-
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "white";
-      dots.forEach(dot => {
-        ctx.beginPath();
-        ctx.arc(dot.x, dot.y, dot.r, 0, Math.PI * 2);
-        ctx.fill();
-
-        dot.x += dot.dx;
-        dot.y += dot.dy;
-
-        if (dot.x < 0 || dot.x > canvas.width) dot.dx *= -1;
-        if (dot.y < 0 || dot.y > canvas.height) dot.dy *= -1;
-      });
-      requestAnimationFrame(animate);
-    }
-    animate();
-
-    window.addEventListener("resize", () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    });
-
-    // Modal logic
-    const modal = document.getElementById("projectModal");
-    const modalTitle = document.getElementById("modalTitle");
-    const modalDesc = document.getElementById("modalDesc");
-    const modalTech = document.getElementById("modalTech");
-    const closeBtn = document.querySelector(".close-btn");
-
-    document.querySelectorAll(".project-card").forEach(card => {
-      card.addEventListener("click", () => {
-        modal.style.display = "flex";
-        modalTitle.textContent = card.dataset.title;
-        modalDesc.textContent = card.dataset.desc;
-        modalTech.textContent = card.dataset.tech;
-      });
-    });
-
-    closeBtn.addEventListener("click", () => {
-      modal.style.display = "none";
-    });
-
-    window.addEventListener("click", (e) => {
-      if (e.target === modal) modal.style.display = "none";
-    });
   </script>
 </body>
 </html>
