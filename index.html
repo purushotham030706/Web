@@ -178,20 +178,69 @@
 
   <!-- Project Modals -->
   <div id="cafeModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('cafeModal')">&times;</span>
-      <h2 class="text-3xl font-bold mb-4">Café Tracker</h2>
-      <p class="text-gray-300">HTML, CSS, JavaScript</p>
-    </div>
-  </div>
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal('cafeModal')">&times;</span>
 
-  <div id="runModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('runModal')">&times;</span>
-      <h2 class="text-3xl font-bold mb-4">Run n Gun</h2>
-      <p class="text-gray-300">Unreal Engine (Blueprints)</p>
+    <h2 class="text-3xl font-bold mb-3">Café Tracker</h2>
+
+    <p class="text-gray-300 mb-4">
+      A lightweight web application to log and manage cafés you’ve visited.
+      Users can store location details and revisit history for personal tracking.
+    </p>
+
+    <!-- Tech Stack -->
+    <div class="flex justify-center gap-2 mb-5 flex-wrap">
+      <span class="px-3 py-1 border border-gray-500 rounded-full text-sm">HTML</span>
+      <span class="px-3 py-1 border border-gray-500 rounded-full text-sm">CSS</span>
+      <span class="px-3 py-1 border border-gray-500 rounded-full text-sm">JavaScript</span>
     </div>
+
+    <!-- GitHub Link -->
+    <a
+      href="https://github.com/purushotham030706"
+      target="_blank"
+      class="inline-flex items-center gap-2 px-5 py-2 border border-gray-400 rounded-lg hover:bg-white hover:text-black transition"
+    >
+      <i class="fab fa-github"></i>
+      View Repository
+    </a>
   </div>
+</div>
+
+
+ <div id="runModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal('runModal')">&times;</span>
+
+    <h2 class="text-3xl font-bold mb-3">Run n Gun</h2>
+
+    <p class="text-gray-300 mb-4">
+      A 2D endless run-and-gun action game focused on fast-paced movement,
+      enemy spawning, and arcade-style scoring mechanics.
+    </p>
+
+    <!-- Tech Stack -->
+    <div class="flex justify-center gap-2 mb-5 flex-wrap">
+      <span class="px-3 py-1 border border-gray-500 rounded-full text-sm">
+        Unreal Engine
+      </span>
+      <span class="px-3 py-1 border border-gray-500 rounded-full text-sm">
+        Blueprints
+      </span>
+    </div>
+
+    <!-- GitHub / Placeholder -->
+    <a
+      href="#"
+      class="inline-flex items-center gap-2 px-5 py-2 border border-gray-400 rounded-lg opacity-60 cursor-not-allowed"
+      title="Repo not public yet"
+    >
+      <i class="fab fa-github"></i>
+      Repository (Coming Soon)
+    </a>
+  </div>
+</div>
+
 
   <!-- Scripts -->
   <script>
