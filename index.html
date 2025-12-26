@@ -78,15 +78,18 @@
       cursor: pointer;
       color: #e5e7eb;
     }
+    
     .glow-header {
       text-shadow: 0 0 6px rgba(255, 255, 255, 0.35);
     }
+   
     .section-divider {
       width: 60px;
       height: 1px;
       background: rgba(255,255,255,0.25);
       margin: 1.5rem auto 2.5rem;
     }
+    
     .card::before {
       content: "";
       display: block;
@@ -95,6 +98,24 @@
       background: rgba(255,255,255,0.4);
       margin-bottom: 0.75rem;
     }
+    
+    #pressStart:hover {
+      color: #ffffff;
+    }
+    
+    .glitch {
+      animation: glitch 0.35s linear;
+    }
+    
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(2px, -2px); }
+      60% { transform: translate(-1px, 1px); }
+      80% { transform: translate(1px, -1px); }
+      100% { transform: translate(0); }
+    }
+
   </style>
 </head>
 
