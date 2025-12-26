@@ -103,4 +103,145 @@
   <section class="text-center py-24">
     <h2 class="text-5xl font-extrabold fade-in">Hi, I'm Purushotham</h2>
     <p class="mt-4 text-lg text-gray-300 fade-in">
-      Computer Science student | Asp
+      Computer Science student | Aspiring Game Developer
+    </p>
+
+    <div class="mt-8 flex justify-center gap-4">
+      <button onclick="openModal('contactModal')"
+        class="px-6 py-3 border border-gray-400 rounded-lg hover:bg-white hover:text-black transition">
+        Contact Me
+      </button>
+      <a href="resume.pdf" target="_blank"
+        class="px-6 py-3 border border-gray-400 rounded-lg">
+        Download Resume
+      </a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="py-20 px-6 fade-in">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-6">/ about me</h2>
+      <p class="text-gray-300 text-lg">
+        I’m a Computer Science Engineering student at JSSSTU with a strong interest
+        in game development and interactive systems. I enjoy working on gameplay
+        mechanics, UI, and performance-aware code, and I’m currently exploring
+        Unreal Engine and low-level programming concepts.
+      </p>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="py-20 fade-in">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold mb-12">/ skills</h2>
+      <div id="skills-container" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="py-20 px-6 fade-in">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-4xl font-bold mb-12 text-center">/ projects</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="card" onclick="openModal('cafeModal')">
+          <h3 class="text-2xl font-semibold">Café Tracker</h3>
+          <p class="mt-2 text-gray-300">Web app to log cafés with location data.</p>
+        </div>
+        <div class="card" onclick="openModal('runModal')">
+          <h3 class="text-2xl font-semibold">Run n Gun</h3>
+          <p class="mt-2 text-gray-300">2D endless run-and-gun game.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Modal -->
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('contactModal')">&times;</span>
+      <h2 class="text-3xl font-bold mb-6">Contact</h2>
+
+      <div class="flex justify-center gap-8 text-3xl">
+        <a href="https://www.linkedin.com/in/purushotham-m-61b35937a" target="_blank" class="hover:text-white">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://instagram.com/YOUR_INSTAGRAM" target="_blank" class="hover:text-white">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <div class="text-xl text-gray-300">
+          purushothambm2006@gmail.com
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project Modals -->
+  <div id="cafeModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('cafeModal')">&times;</span>
+      <h2 class="text-3xl font-bold mb-4">Café Tracker</h2>
+      <p class="text-gray-300">HTML, CSS, JavaScript</p>
+    </div>
+  </div>
+
+  <div id="runModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('runModal')">&times;</span>
+      <h2 class="text-3xl font-bold mb-4">Run n Gun</h2>
+      <p class="text-gray-300">Unreal Engine (Blueprints)</p>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 45 },
+        color: { value: "#ffffff" },
+        opacity: { value: 0.4 },
+        size: { value: 2 },
+        move: { enable: true, speed: 0.8 }
+      }
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => e.isIntersecting && e.target.classList.add("visible"));
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+
+    const skills = [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "C Programming",
+      "Python (Basics)",
+      "Unreal Engine (Beginner)",
+      "UI/UX Basics"
+    ];
+
+    const skillsContainer = document.getElementById("skills-container");
+    skills.forEach(skill => {
+      const div = document.createElement("div");
+      div.textContent = skill;
+      div.className = "text-lg glow text-gray-200";
+      skillsContainer.appendChild(div);
+    });
+
+    function openModal(id) {
+      document.getElementById(id).style.display = "flex";
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = "none";
+    }
+
+    window.onclick = e => {
+      document.querySelectorAll(".modal").forEach(m => {
+        if (e.target === m) m.style.display = "none";
+      });
+    };
+  </script>
+</body>
+</html>
