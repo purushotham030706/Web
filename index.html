@@ -16,14 +16,13 @@
 
   <style>
     body {
-      background: linear-gradient(135deg, #0a1a33, #05101f);
-      color: #ffcc66;
+      background: linear-gradient(135deg, #0b1220, #05080f);
+      color: #e5e7eb;
       font-family: 'Poppins', sans-serif;
     }
 
     .glow:hover {
-      color: #ffdb70;
-      text-shadow: 0 0 8px #ffdb70, 0 0 16px #ffaa33;
+      text-shadow: 0 0 8px rgba(255,255,255,0.6);
       transform: scale(1.05);
       transition: 0.3s ease;
     }
@@ -40,8 +39,8 @@
     }
 
     .card {
-      background: rgba(255, 204, 102, 0.05);
-      border: 1px solid rgba(255, 204, 102, 0.2);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.15);
       border-radius: 1rem;
       padding: 1.5rem;
       cursor: pointer;
@@ -49,27 +48,27 @@
     }
 
     .card:hover {
-      background: rgba(255, 204, 102, 0.1);
+      background: rgba(255,255,255,0.08);
       transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(255, 204, 102, 0.3);
+      box-shadow: 0 0 20px rgba(255,255,255,0.15);
     }
 
     .modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(0,0,0,0.85);
       justify-content: center;
       align-items: center;
       z-index: 50;
     }
 
     .modal-content {
-      background: #0a1a33;
-      border: 1px solid rgba(255, 204, 102, 0.3);
+      background: #0b1220;
+      border: 1px solid rgba(255,255,255,0.2);
       border-radius: 1rem;
       padding: 2rem;
-      max-width: 600px;
+      max-width: 500px;
       text-align: center;
     }
 
@@ -77,24 +76,24 @@
       float: right;
       font-size: 1.5rem;
       cursor: pointer;
-      color: #ffaa33;
+      color: #e5e7eb;
     }
   </style>
 </head>
 
 <body class="overflow-x-hidden">
 
-  <!-- Particles Background -->
+  <!-- Particles -->
   <div id="particles-js" class="fixed inset-0 -z-10"></div>
 
   <!-- Header -->
   <header class="flex justify-between items-center px-8 py-6">
-    <h1 class="text-2xl font-bold text-orange-400">Purushotham M</h1>
+    <h1 class="text-2xl font-bold">Purushotham M</h1>
     <div class="flex space-x-6 text-2xl">
-      <a href="https://github.com/purushotham030706" target="_blank" class="hover:text-orange-300">
+      <a href="https://github.com/purushotham030706" target="_blank" class="hover:text-white">
         <i class="fab fa-github"></i>
       </a>
-      <a href="https://www.linkedin.com/in/purushotham-m-61b35937a" target="_blank" class="hover:text-orange-300">
+      <a href="https://www.linkedin.com/in/purushotham-m-61b35937a" target="_blank" class="hover:text-white">
         <i class="fab fa-linkedin"></i>
       </a>
     </div>
@@ -102,157 +101,6 @@
 
   <!-- Hero -->
   <section class="text-center py-24">
-    <h2 class="text-5xl font-extrabold text-orange-400 fade-in">
-      Hi, I'm Purushotham
-    </h2>
-    <p class="mt-4 text-lg text-yellow-200 fade-in">
-      Computer Science student | Aspiring Game Developer
-    </p>
-
-    <div class="mt-8 flex justify-center gap-4">
-      <a href="mailto:purushothambm2006@gmail.com"
-         class="px-6 py-3 border border-orange-400 rounded-lg hover:bg-orange-400 hover:text-blue-900 transition">
-        Contact Me
-      </a>
-      <a href="resume.pdf" target="_blank"
-         class="px-6 py-3 border border-orange-400 rounded-lg">
-        Download Resume
-      </a>
-    </div>
-  </section>
-
-  <!-- About -->
-  <section class="py-20 px-6 fade-in">
-    <div class="max-w-3xl mx-auto text-center">
-      <h2 class="text-4xl font-bold text-orange-400 mb-6">/ about me</h2>
-      <p class="text-yellow-200 text-lg">
-        I’m a Computer Science Engineering student at JSSSTU with a strong interest
-        in game development and interactive systems. I enjoy working on gameplay
-        mechanics, UI, and performance-aware code, and I’m currently exploring
-        Unreal Engine and low-level programming concepts.
-      </p>
-    </div>
-  </section>
-
-  <!-- Skills -->
-  <section class="py-20 fade-in">
-    <div class="max-w-4xl mx-auto px-6 text-center">
-      <h2 class="text-4xl font-bold text-orange-400 mb-12">/ skills</h2>
-      <div id="skills-container"
-           class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-center"></div>
-    </div>
-  </section>
-
-  <!-- Projects -->
-  <section class="py-20 px-6 fade-in">
-    <div class="max-w-5xl mx-auto">
-      <h2 class="text-4xl font-bold text-orange-400 mb-12 text-center">/ projects</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-        <div class="card" onclick="openModal('cafeModal')">
-          <h3 class="text-2xl font-semibold text-orange-300">Café Tracker</h3>
-          <p class="mt-2 text-yellow-200">
-            Web app to log cafés with location and visit details.
-          </p>
-        </div>
-
-        <div class="card" onclick="openModal('runModal')">
-          <h3 class="text-2xl font-semibold text-orange-300">Run n Gun</h3>
-          <p class="mt-2 text-yellow-200">
-            2D endless run-and-gun action game.
-          </p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Modals -->
-  <div id="cafeModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('cafeModal')">&times;</span>
-      <h2 class="text-3xl font-bold mb-4 text-orange-400">Café Tracker</h2>
-      <p class="text-yellow-200 mb-4">
-        Tracks visited cafés with location tagging and visit dates.
-      </p>
-      <p class="text-yellow-300 mb-4">
-        <strong>Tech:</strong> HTML, CSS, JavaScript
-      </p>
-      <a href="https://github.com/purushotham030706"
-         target="_blank"
-         class="text-orange-400 underline">
-        View on GitHub
-      </a>
-    </div>
-  </div>
-
-  <div id="runModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('runModal')">&times;</span>
-      <h2 class="text-3xl font-bold mb-4 text-orange-400">Run n Gun</h2>
-      <p class="text-yellow-200 mb-4">
-        Implemented player movement, enemy spawning, collision handling,
-        and scoring using Unreal Engine Blueprints.
-      </p>
-      <p class="text-yellow-300 mb-4">
-        <strong>Tech:</strong> Unreal Engine (Blueprints)
-      </p>
-    </div>
-  </div>
-
-  <!-- Scripts -->
-  <script>
-    particlesJS("particles-js", {
-      particles: {
-        number: { value: 50 },
-        color: { value: "#ffaa33" },
-        opacity: { value: 0.6, random: true },
-        size: { value: 3, random: true },
-        line_linked: { enable: true, distance: 120, opacity: 0.4 },
-        move: { enable: true, speed: 1 }
-      }
-    });
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add("visible");
-      });
-    }, { threshold: 0.2 });
-
-    document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
-
-    const skills = [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "C Programming",
-      "Python (Basics)",
-      "Unreal Engine (Beginner)",
-      "UI/UX Basics"
-    ];
-
-    const skillsContainer = document.getElementById("skills-container");
-    skills.forEach(skill => {
-      const div = document.createElement("div");
-      div.textContent = skill;
-      div.className = "text-lg glow text-yellow-200";
-      skillsContainer.appendChild(div);
-    });
-
-    function openModal(id) {
-      document.getElementById(id).style.display = "flex";
-    }
-
-    function closeModal(id) {
-      document.getElementById(id).style.display = "none";
-    }
-
-    window.onclick = e => {
-      document.querySelectorAll(".modal").forEach(m => {
-        if (e.target === m) m.style.display = "none";
-      });
-    };
-  </script>
-</body>
-</html>
+    <h2 class="text-5xl font-extrabold fade-in">Hi, I'm Purushotham</h2>
+    <p class="mt-4 text-lg text-gray-300 fade-in">
+      Computer Science student | Asp
