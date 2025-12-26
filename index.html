@@ -307,6 +307,17 @@
       "React (Learning)",
       "Node.js (Learning)"
     ];
+    const pressStart = document.getElementById("pressStart");
+      pressStart.addEventListener("click", () => {
+      document.body.classList.add("glitch");
+    
+      pressStart.textContent = "GAME DEV MODE ENABLED";
+    
+      setTimeout(() => {
+        document.body.classList.remove("glitch");
+      }, 350);
+    });
+
 
     const skillsContainer = document.getElementById("skills-container");
     skills.forEach(skill => {
