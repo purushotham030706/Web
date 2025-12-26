@@ -158,23 +158,41 @@
 
   <!-- Contact Modal -->
   <div id="contactModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('contactModal')">&times;</span>
-      <h2 class="text-3xl font-bold mb-6">Contact</h2>
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal('contactModal')">&times;</span>
 
-      <div class="flex justify-center gap-8 text-3xl">
-        <a href="https://www.linkedin.com/in/purushotham-m-61b35937a" target="_blank" class="hover:text-white">
-          <i class="fab fa-linkedin"></i>
-        </a>
-        <a href="https://instagram.com/YOUR_INSTAGRAM" target="_blank" class="hover:text-white">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <div class="text-xl text-gray-300">
-          purushothambm2006@gmail.com
-        </div>
-      </div>
+    <h2 class="text-3xl font-bold mb-6 glow-header">Contact</h2>
+
+    <!-- Icons -->
+    <div class="flex justify-center gap-8 text-3xl mb-6">
+      <!-- LinkedIn -->
+      <a
+        href="https://www.linkedin.com/in/purushotham-m-61b35937a"
+        target="_blank"
+        class="hover:text-white transition"
+        aria-label="LinkedIn"
+      >
+        <i class="fab fa-linkedin"></i>
+      </a>
+
+      <!-- Instagram (optional, keep if you want) -->
+      <a
+        href="https://instagram.com/YOUR_INSTAGRAM"
+        target="_blank"
+        class="hover:text-white transition"
+        aria-label="Instagram"
+      >
+        <i class="fab fa-instagram"></i>
+      </a>
     </div>
+
+    <!-- Email (display only) -->
+    <p class="text-gray-300 text-lg select-all">
+      purushothambm2006@gmail.com
+    </p>
   </div>
+</div>
+
 
   <!-- Project Modals -->
   <div id="cafeModal" class="modal">
