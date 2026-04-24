@@ -25,7 +25,7 @@ I am currently learning the **MERN stack** through a structured course by
 
 ---
 
-##  Tech Stack Used
+##  Tech Stack 
 
 ### Frontend
 - HTML
