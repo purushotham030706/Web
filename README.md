@@ -6,7 +6,7 @@ The site showcases my projects, technical skills, and current learning focus as 
 Computer Science Engineering student with interests in game development and
 full-stack web development.
 
- Live site: https://purushotham030706.github.io/Web/
+ Live site:
 
 ---
 
