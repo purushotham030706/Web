@@ -16,10 +16,9 @@ export const ParticleBackground = () => {
     let height = (canvas.height = window.innerHeight);
 
     const isMobile = window.innerWidth < 768;
-    // Increased particle count and tuned visibility
-    const particleCount = isMobile ? 55 : prefersReducedMotion ? 45 : 120;
-    const maxLinkDistance = isMobile ? 95 : 140;
-    const mouseRadius = isMobile ? 120 : 180;
+    const particleCount = isMobile ? 65 : prefersReducedMotion ? 45 : 120;
+    const maxLinkDistance = isMobile ? 100 : 140;
+    const mouseRadius = isMobile ? 140 : 180;
 
     let mouse = {
       x: -1000,
@@ -33,23 +32,19 @@ export const ParticleBackground = () => {
         const speed = prefersReducedMotion ? 0.08 : 0.32;
         this.vx = (Math.random() - 0.5) * speed;
         this.vy = (Math.random() - 0.5) * speed;
-        // Small crisp star-like dots
-        this.radius = Math.random() * 0.9 + 0.8; // 0.8px - 1.7px
-        // Solid steady alpha (no twinkling)
-        this.alpha = Math.random() * 0.35 + 0.45; // 0.45 - 0.8
+        this.radius = Math.random() * 0.9 + 0.8;
+        this.alpha = Math.random() * 0.35 + 0.45;
       }
 
       update() {
         this.x += this.vx;
         this.y += this.vy;
 
-        // Wrap around boundaries smoothly
         if (this.x < 0) this.x = width;
         if (this.x > width) this.x = 0;
         if (this.y < 0) this.y = height;
         if (this.y > height) this.y = 0;
 
-        // Subtle organic deflection from cursor
         const dx = mouse.x - this.x;
         const dy = mouse.y - this.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
@@ -57,15 +52,14 @@ export const ParticleBackground = () => {
         if (dist < mouseRadius && !prefersReducedMotion) {
           const force = (mouseRadius - dist) / mouseRadius;
           const angle = Math.atan2(dy, dx);
-          this.x -= Math.cos(angle) * force * 1.5;
-          this.y -= Math.sin(angle) * force * 1.5;
+          this.x -= Math.cos(angle) * force * 1.6;
+          this.y -= Math.sin(angle) * force * 1.6;
         }
       }
 
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        // Crisp white/off-white star particle
         ctx.fillStyle = `rgba(241, 245, 249, ${this.alpha})`;
         ctx.fill();
       }
@@ -88,9 +82,28 @@ export const ParticleBackground = () => {
       mouse.y = -1000;
     };
 
+    // Mobile Touch handlers for particle tethering
+    const handleTouchMove = (e) => {
+      if (e.touches && e.touches.length > 0) {
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+      }
+    };
+
+    const handleTouchEnd = () => {
+      mouse.x = -1000;
+      mouse.y = -1000;
+    };
+
     window.addEventListener('resize', handleResize, { passive: true });
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     document.addEventListener('mouseleave', handleMouseLeave);
+    
+    // Add touch support to background network on mobile
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    window.addEventListener('touchstart', handleTouchMove, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd);
+    window.addEventListener('touchcancel', handleTouchEnd);
 
     let isDocumentVisible = true;
     const handleVisibilityChange = () => {
@@ -106,7 +119,7 @@ export const ParticleBackground = () => {
 
       ctx.clearRect(0, 0, width, height);
 
-      // Render connecting links between nearby particles
+      // Render connecting links
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const p1 = particles[i];
@@ -127,7 +140,7 @@ export const ParticleBackground = () => {
         }
       }
 
-      // Connect particles to cursor when nearby
+      // Connect particles to cursor or touch
       if (mouse.x > 0 && mouse.y > 0 && !prefersReducedMotion) {
         for (let i = 0; i < particles.length; i++) {
           const p = particles[i];
@@ -147,7 +160,6 @@ export const ParticleBackground = () => {
         }
       }
 
-      // Draw all star particles
       for (let i = 0; i < particles.length; i++) {
         particles[i].update();
         particles[i].draw();
@@ -163,6 +175,10 @@ export const ParticleBackground = () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchstart', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
+      window.removeEventListener('touchcancel', handleTouchEnd);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, [prefersReducedMotion]);

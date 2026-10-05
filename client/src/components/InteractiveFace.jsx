@@ -22,7 +22,7 @@ export const InteractiveFace = ({ imageSrc = '/puru.jpg' }) => {
 
     // Finer resolution for clean photographic likeness
     const step = 3; // Fine 3px grid density
-    const mouseRadius = 65; // Smaller localized ripple radius
+    const mouseRadius = 75; // Localized ripple radius
     const returnSpeed = 0.12; // Snappy return
     const friction = 0.82; // Controlled dampening
 
@@ -53,15 +53,15 @@ export const InteractiveFace = ({ imageSrc = '/puru.jpg' }) => {
         const distance = Math.sqrt(dx * dx + dy * dy);
 
         if (distance < mouseRadius && mouse.isHovered && !prefersReducedMotion) {
-          // Gentle, subtle ripple (reduced intensity)
+          // Subtle ripple on cursor or touch
           const force = (1 - distance / mouseRadius);
           const angle = Math.atan2(dy, dx);
-          const repelStrength = force * 4.5; // Reduced from 16 to 4.5
+          const repelStrength = force * 5.0;
 
           this.vx -= Math.cos(angle) * repelStrength;
           this.vy -= Math.sin(angle) * repelStrength;
 
-          this.currentRadius = this.baseRadius + force * 0.6;
+          this.currentRadius = this.baseRadius + force * 0.7;
         } else {
           this.currentRadius += (this.baseRadius - this.currentRadius) * 0.15;
         }
@@ -89,7 +89,10 @@ export const InteractiveFace = ({ imageSrc = '/puru.jpg' }) => {
     const initPoints = () => {
       const naturalW = img.naturalWidth || 600;
       const naturalH = img.naturalHeight || 800;
-      const targetW = 320;
+      
+      // Responsive target width (max 320 on desktop, scaled down to 260 on small phone screens)
+      const containerW = container.clientWidth || 320;
+      const targetW = Math.min(320, Math.max(250, containerW - 20));
       const targetH = Math.round(targetW * (naturalH / naturalW));
 
       canvas.width = targetW;
@@ -116,9 +119,7 @@ export const InteractiveFace = ({ imageSrc = '/puru.jpg' }) => {
           if (a > 30) {
             const brightness = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
 
-            // Render crisp, consistent dot matrix
             if (brightness > 0.06) {
-              // Unified 2-tone palette: Crisp off-white & subtle cyan-tinted highlight
               let dotColor;
               if (brightness > 0.6) {
                 dotColor = `rgba(240, 246, 255, ${0.75 + brightness * 0.25})`;
@@ -128,7 +129,6 @@ export const InteractiveFace = ({ imageSrc = '/puru.jpg' }) => {
                 dotColor = `rgba(125, 160, 185, ${0.25 + brightness * 0.35})`;
               }
 
-              // Fine dot size (1.1px to 1.7px) for high fidelity
               const dotRadius = Math.max(0.6, 1.1 + brightness * 0.6);
               particles.push(new Dot(x, y, dotColor, dotRadius));
             }
@@ -145,6 +145,7 @@ export const InteractiveFace = ({ imageSrc = '/puru.jpg' }) => {
       initPoints();
     }
 
+    // Mouse handlers
     const handleMouseMove = (e) => {
       const rect = canvas.getBoundingClientRect();
       const scaleX = canvas.width / rect.width;
@@ -160,8 +161,42 @@ export const InteractiveFace = ({ imageSrc = '/puru.jpg' }) => {
       mouse.targetY = -1000;
     };
 
-    canvas.addEventListener('mousemove', handleMouseMove);
+    // Touch event handlers for phones / tablets
+    const handleTouchMove = (e) => {
+      if (e.touches && e.touches.length > 0) {
+        const touch = e.touches[0];
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        mouse.targetX = (touch.clientX - rect.left) * scaleX;
+        mouse.targetY = (touch.clientY - rect.top) * scaleY;
+        mouse.isHovered = true;
+      }
+    };
+
+    const handleTouchStart = (e) => {
+      handleTouchMove(e);
+    };
+
+    const handleTouchEnd = () => {
+      handleMouseLeave();
+    };
+
+    const handleResize = () => {
+      if (img.complete) {
+        initPoints();
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    canvas.addEventListener('mousemove', handleMouseMove, { passive: true });
     canvas.addEventListener('mouseleave', handleMouseLeave);
+    
+    // Touch event listeners with touch-action safe handling
+    canvas.addEventListener('touchstart', handleTouchStart, { passive: true });
+    canvas.addEventListener('touchmove', handleTouchMove, { passive: true });
+    canvas.addEventListener('touchend', handleTouchEnd);
+    canvas.addEventListener('touchcancel', handleTouchEnd);
 
     const animate = () => {
       mouse.x += (mouse.targetX - mouse.x) * 0.3;
@@ -181,9 +216,14 @@ export const InteractiveFace = ({ imageSrc = '/puru.jpg' }) => {
 
     return () => {
       cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('resize', handleResize);
       if (canvas) {
         canvas.removeEventListener('mousemove', handleMouseMove);
         canvas.removeEventListener('mouseleave', handleMouseLeave);
+        canvas.removeEventListener('touchstart', handleTouchStart);
+        canvas.removeEventListener('touchmove', handleTouchMove);
+        canvas.removeEventListener('touchend', handleTouchEnd);
+        canvas.removeEventListener('touchcancel', handleTouchEnd);
       }
     };
   }, [imageSrc, prefersReducedMotion]);
@@ -191,16 +231,16 @@ export const InteractiveFace = ({ imageSrc = '/puru.jpg' }) => {
   return (
     <div
       ref={containerRef}
-      className="relative flex flex-col items-center justify-center select-none"
+      className="relative flex flex-col items-center justify-center select-none w-full max-w-[320px] mx-auto"
     >
-      <div className="relative rounded-2xl overflow-hidden flex items-center justify-center">
+      <div className="relative rounded-2xl overflow-hidden flex items-center justify-center touch-manipulation">
         <canvas
           ref={canvasRef}
           data-cursor="hover"
-          className="cursor-pointer max-w-full drop-shadow-[0_10px_35px_rgba(56,189,248,0.12)]"
+          className="cursor-pointer max-w-full drop-shadow-[0_10px_35px_rgba(56,189,248,0.12)] touch-none"
           aria-label="Interactive Dot Matrix Portrait"
         />
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#08090c] via-transparent to-transparent opacity-30" />
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#060913] via-transparent to-transparent opacity-30" />
       </div>
     </div>
   );
