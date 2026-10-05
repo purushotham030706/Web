@@ -1,8 +1,8 @@
 services:
-  # Backend API service
+  # Backend API web service
   - type: web
     name: puru-portfolio-api
-    env: node
+    runtime: node
     plan: free
     rootDir: server
     buildCommand: npm install
@@ -11,12 +11,13 @@ services:
       - key: PORT
         value: 5000
 
-  # Frontend static web app
-  - type: static_site
+  # Frontend web service
+  - type: web
     name: puru-portfolio-web
+    runtime: static
     rootDir: client
     buildCommand: npm install && npm run build
-    publishPath: dist
+    staticPublishPath: dist
     routes:
       - type: rewrite
         source: /*
