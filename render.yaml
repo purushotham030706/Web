@@ -10,6 +10,12 @@ services:
     envVars:
       - key: PORT
         value: 5000
+      - key: NODE_ENV
+        value: production
+      - key: CLIENT_URL
+        value: https://puru-portfolio-web.onrender.com
+      - key: MONGODB_URI
+        sync: false
 
   # Frontend web service
   - type: web
@@ -18,6 +24,9 @@ services:
     rootDir: client
     buildCommand: npm install && npm run build
     staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://puru-portfolio-api.onrender.com
     routes:
       - type: rewrite
         source: /*

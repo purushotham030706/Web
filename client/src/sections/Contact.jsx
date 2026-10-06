@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { PERSONAL_INFO } from '../utils/portfolioData';
 
+const API_URL = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
+
 export const Contact = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '', website: '' });
   const [status, setStatus] = useState({ loading: false, success: false, error: null });
 
   const handleChange = (e) => {
@@ -12,15 +14,16 @@ export const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) {
-      setStatus({ loading: false, success: false, error: 'Please fill in all fields.' });
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setStatus({ loading: false, success: false, error: 'Please fill in all required fields.' });
       return;
     }
 
     setStatus({ loading: true, success: false, error: null });
 
     try {
-      const res = await fetch('/api/contact', {
+      const endpoint = `${API_URL}/api/contact`;
+      const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -28,16 +31,16 @@ export const Contact = () => {
 
       const data = await res.json();
       if (!res.ok) {
-        throw new Error(data.error || 'Failed to send message');
+        throw new Error(data.message || 'Unable to send message.');
       }
 
       setStatus({ loading: false, success: true, error: null });
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ name: '', email: '', message: '', website: '' });
     } catch (err) {
       setStatus({
         loading: false,
         success: false,
-        error: 'Backend is offline or configuring. Click direct email below to send instantly!'
+        error: err.message || 'Unable to send message. Click direct email below to send instantly!'
       });
     }
   };
@@ -164,6 +167,20 @@ export const Contact = () => {
               </h4>
 
               <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+                {/* Honeypot anti-spam field (hidden from real users) */}
+                <div style={{ display: 'none', position: 'absolute', left: '-9999px', opacity: 0 }} aria-hidden="true">
+                  <label htmlFor="website">Website</label>
+                  <input
+                    type="text"
+                    id="website"
+                    name="website"
+                    value={formData.website}
+                    onChange={handleChange}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
+
                 <div>
                   <label className="block text-xs font-mono lowercase text-zinc-400 mb-2">
                     name
